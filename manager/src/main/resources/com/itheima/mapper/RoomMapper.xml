@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.RoomMapper">
+<!--新增图书-->
+<!--    INSERT INTO `cloudlibrary_plus`.`room` (`room_name`, `location`, `capacity`, `phone`, `status`, `open_time`, `close_time`, `description`, `isHot`) VALUES ('静学斋', '图书馆3楼东侧', 50, '028-12345678', '0', '08:00:00', '22:00:00', '安静学习区，配备独立阅读灯', 1)-->
+<insert id="addRoom" parameterType="com.itheima.domain.Room">
+    insert into room(room_id,room_name,location,capacity,phone,status,open_time,close_time,description,isHot)
+    values (#{id},#{name},#{location},#{capacity},#{phone},#{status},#{openTime},#{closeTime},#{description},#{isHot})
+</insert>
+<!--修改room信息-->
+    <update id="editRoom" >
+        update room
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null" >
+                room_name = #{name},
+            </if>
+            <if test="location != null" >
+                location = #{location},
+            </if>
+            <if test="capacity != null" >
+                capacity = #{capacity},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone},
+            </if>
+            <if test="status != null" >
+                status = #{status},
+            </if>
+            <if test="openTime != null" >
+                open_time = #{openTime},
+            </if>
+            <if test="closeTime != null" >
+                close_time = #{closeTime},
+            </if>
+            <if test="appointment != null" >
+                room_appointment = #{appointment},
+            </if>
+            <if test="appointtime != null" >
+                room_appointtime = #{appointtime},
+            </if>
+            <if test="description != null" >
+                description = #{description},
+            </if>
+            <if test="isHot!= null" >
+                isHot= #{isHot},
+            </if>
+        </trim>
+        where room_id = #{id}
+    </update>
+</mapper>
